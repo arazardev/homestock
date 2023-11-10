@@ -23,7 +23,7 @@ const AddCategoryForm = () => {
 		<form className="add" onSubmit={handleSubmit}>
 			<div className="block">
 				<label>Nombre</label>
-				<input name="categoryName" required></input>
+				<input name="categoryName" type="text" required></input>
 			</div>
             <button type="submit">Agregar</button>
             {

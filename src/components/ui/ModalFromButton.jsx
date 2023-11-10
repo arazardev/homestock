@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-const ModalFromButton = ({dialogClass="", className, buttonText, children }) => {
+const ModalFromButton = ({dialogClass="", buttonClassName, buttonText, children }) => {
 	const modalElement = useRef();
 
 	const handleShowModal = () => {
@@ -13,7 +13,7 @@ const ModalFromButton = ({dialogClass="", className, buttonText, children }) => 
 
 	return (
 		<>
-			<button className={className} onClick={handleShowModal}>{buttonText}</button>
+			<button className={buttonClassName} onClick={handleShowModal}>{buttonText}</button>
 			<dialog ref={modalElement} className={dialogClass}>
 				<button className="close" onClick={handleCloseModal}>
 					x

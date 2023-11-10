@@ -19,6 +19,10 @@ const ProductEdit = (product) => {
 						<td>{product.brand}</td>
 					</tr>
 					<tr>
+						<th>Descripcion</th>
+						<td>{product.description}</td>
+					</tr>
+					<tr>
 						<th>Cant.Minima</th>
 						<td>{product.minQuantity}</td>
 					</tr>

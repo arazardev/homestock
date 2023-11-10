@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../context/Products";
 import { UserContext } from "../../context/User";
+import { ClipboardIcon } from "./Icons";
 
 const AsideList = () => {
 	const { products, categories } = useContext(ProductsContext);
 	const {preferences,setListAll} = useContext(UserContext)
 	const [productsByCategory, setProductsByCategory] = useState();
+
 
 	useEffect(() => {
 		let aux = {};
@@ -26,19 +28,31 @@ const AsideList = () => {
 		setProductsByCategory(aux);
 	}, [products,preferences]);
 
+	const copyList = ()=>{
+		const divList = document.querySelector("#shopList")
+		navigator.clipboard.writeText(divList.textContent.replaceAll("-","\n-"))
+		window.alert("¡Lista copiada!")
+	}
+
 	return (
-			<aside className="list">
-				<div className="block">
-					<label >Listar todo:</label>
-					<input type="checkbox" onChange={e=>setListAll(e.target.checked)}></input>
-				</div>
-				<br></br>
-				<br></br>
+		<aside className="list">
+			<div className="block">
+				<label>Listar todo:</label>
+				<input
+					type="checkbox"
+					checked={preferences.listAll}
+					onChange={(e) => setListAll(e.target.checked)}
+				></input>
+			</div>
+			<br></br>
+			<hr></hr>
+			<br></br>
+			<div id="shopList">
 				{productsByCategory &&
 					Object.keys(productsByCategory).map((category) => {
 						return (
 							<div key={category}>
-								{productsByCategory[category].length > 0 && category}
+								{productsByCategory[category].length > 0 && <u>{`\n*${category}`}</u>}
 								<ul>
 									{productsByCategory[category].map((c) => {
 										return <li key={c}>- {c}</li>;
@@ -47,8 +61,13 @@ const AsideList = () => {
 							</div>
 						);
 					})}
-				<ul></ul>
-			</aside>
+			</div>
+			<br></br>
+			<hr></hr>
+			<button className="empty" onClick={copyList}>
+				<ClipboardIcon size="28"></ClipboardIcon> Copiar lista
+			</button>
+		</aside>
 	);
 };
 

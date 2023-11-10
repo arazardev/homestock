@@ -1,27 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import ModalFromButton from "./ModalFromButton";
 import AddProductForm from "./AddProductForm";
 import AddCategoryForm from "./AddCategoryForm";
 import DeleteCategoryForm from "./DeleteCategoryForm";
+import { ProductsContext } from "../../context/Products";
 
 const AsideMenu = () => {
+	const {setSearch} = useContext(ProductsContext)
+
+	const handleSearch = (e)=>{
+		const term = e.target.value
+		setSearch(term)
+	}
 	return (
 		<aside className="filters">
-			<ModalFromButton className={"menu"} buttonText={"+Agregar producto"}>
+			<ModalFromButton buttonClassName={"success"} buttonText={"+Agregar producto"}>
 				<AddProductForm />
 			</ModalFromButton>
-			<ModalFromButton className={"menu"} buttonText={"+Agregar Categoria"}>
+			<ModalFromButton buttonClassName={"menu"} buttonText={"+Agregar Categoria"}>
 				<AddCategoryForm />
 			</ModalFromButton>
-			<ModalFromButton className={"red"} buttonText={"- Eliminar Categoria"}>
+			<ModalFromButton buttonClassName={"red"} buttonText={"- Eliminar Categoria"}>
 				<DeleteCategoryForm />
 			</ModalFromButton>
 			<br></br>
-			{/* <label>Filtros:</label>
-    <input
-        placeholder="Nombre..."
-        onChange={(e) => setSearch(e.target.value)}
-    ></input> */}
+			<label className="bold antique">Buscar:</label>
+			<input
+				placeholder="Nombre o marca..."
+				type="text"
+				name="search"
+				onChange={handleSearch}
+			></input>
 		</aside>
 	);
 };

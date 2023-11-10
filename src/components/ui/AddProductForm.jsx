@@ -18,6 +18,8 @@ const AddProductForm = () => {
 		data.minQuantity = Object.fromEntries(formData).minQuantity
 		data.mandatory = mandatory
         data.category = Object.fromEntries(formData).category
+        data.description = Object.fromEntries(formData).description
+        data.inicialStock = Object.fromEntries(formData).inicialStock
         const key=crypto.randomUUID()
 		try {
 			addProduct({...data,key:key})
@@ -36,6 +38,14 @@ const AddProductForm = () => {
 				<div className="block">
 					<label htmlFor="brand">Marca:</label>
 					<input name="brand" type="text"></input>
+				</div>
+				<div className="block">
+					<label htmlFor="description">Descripcion:</label>
+					<input name="description" type="text"></input>
+				</div>
+				<div className="block">
+					<label htmlFor="inicialStock">Stock Inicial:</label>
+					<input name="inicialStock" type="number"></input>
 				</div>
 				<div className="block">
 					<label htmlFor="minQuantity">Cantidad Minima:</label>

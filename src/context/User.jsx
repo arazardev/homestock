@@ -4,7 +4,7 @@ export const UserContext = createContext([])
 
 export const UserProvider = ({children}) => {
 
-    const [preferences,setPreferences] = useState({listAll:true})
+    const [preferences,setPreferences] = useState({listAll:false})
 
     useEffect(()=>{
         if (localStorage.getItem("preferences")){
@@ -13,8 +13,9 @@ export const UserProvider = ({children}) => {
     },[])
 
     const setListAll = (listAll)=>{
-        setPreferences({...preferences,listAll:listAll})
-        localStorage.setItem("preferences",JSON.stringify(preferences))
+        const updatedPreferences = {...preferences,listAll:listAll}
+        setPreferences(updatedPreferences)
+        localStorage.setItem("preferences",JSON.stringify(updatedPreferences))
     }
     return <UserContext.Provider value={{preferences,setListAll}}>{children}</UserContext.Provider>
 

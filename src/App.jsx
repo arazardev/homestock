@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './index.css'
 import { ProductsContext } from './context/Products';
 import Product from './components/ui/Product';
@@ -8,7 +8,8 @@ import Header from './components/ui/Header';
 import { UserProvider } from './context/User';
 
 function App() {
-	const { products } = useContext(ProductsContext);
+	const { products,search } = useContext(ProductsContext);
+	const [filteredProducts,setFilteredProducts] = useState({})
 	
 	return (
 		<section className="container">
@@ -16,12 +17,14 @@ function App() {
 			<AsideMenu />
 			<main>
 				{Object.keys(products)?.map((label) => {
-					return (
-						<Product
-							product={products[label]}
-							key={products[label].key}
-						></Product>
-					);
+					if (label.includes(search)){
+						return (
+							<Product
+								product={products[label]}
+								key={products[label].key}
+							></Product>
+						);
+					}
 				})}
 			</main>
 			<UserProvider>

@@ -27,7 +27,7 @@ const Product = ({product}) => {
 				>
 					<PlusIcon size="20"></PlusIcon>
 				</button>
-				<ModalFromButton dialogClass='md' className="btn-product sm" buttonText={<EditIcon size="20"></EditIcon>}>
+				<ModalFromButton dialogClass='md' buttonClassName="btn-product sm" buttonText={<EditIcon size="20"></EditIcon>}>
 					<ProductEdit {...product}></ProductEdit>
 				</ModalFromButton>
 			</div>

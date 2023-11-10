@@ -5,6 +5,7 @@ export const ProductsContext = createContext([])
 export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState({})
     const [categories,setCategories] = useState([])
+    const [search, setSearch] = useState("")
 
     useEffect(()=>{
       if (localStorage.getItem("products")){
@@ -35,7 +36,7 @@ export const ProductsProvider = ({children}) => {
         if (Object.keys(products).includes(product.label)){
           throw new Error("El producto ya existe")
         }
-        const newProductsState = {...products,[product.label]:{...product,stock:0}}
+        const newProductsState = {...products,[product.label]:{...product,stock:product.inicialStock ?? 0}}
         setProducts(newProductsState)
         localStorage.setItem("products",JSON.stringify(newProductsState))
     }
@@ -60,5 +61,21 @@ export const ProductsProvider = ({children}) => {
       localStorage.setItem("products",JSON.stringify(auxProducts))
     }
 
-  return <ProductsContext.Provider value={{categories,addCategory,deleteCategory,products,addProduct,deleteProduct,addProductStock}}>{children}</ProductsContext.Provider>;
+  return (
+		<ProductsContext.Provider
+			value={{
+				categories,
+				search,
+				setSearch,
+				addCategory,
+				deleteCategory,
+				products,
+				addProduct,
+				deleteProduct,
+				addProductStock,
+			}}
+		>
+			{children}
+		</ProductsContext.Provider>
+	);
 }
