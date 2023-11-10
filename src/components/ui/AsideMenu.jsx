@@ -14,7 +14,7 @@ const AsideMenu = () => {
 	}
 	return (
 		<aside className="filters">
-			<ModalFromButton buttonClassName={"success"} buttonText={"+Agregar producto"}>
+			<ModalFromButton buttonClassName={"success"} buttonText={"+Inventariar producto"}>
 				<AddProductForm />
 			</ModalFromButton>
 			<ModalFromButton buttonClassName={"menu"} buttonText={"+Agregar Categoria"}>
