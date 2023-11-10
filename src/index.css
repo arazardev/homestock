@@ -1,0 +1,104 @@
+/* 
+Colores de claro a oscuro:
+
+#73EEDC 
+#73C2BE
+#776885
+#5F1A37
+#04030F 
+
+*/
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #04030F;
+  color: #73EEDC
+}
+
+section.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  min-height: 100vh;
+  grid-template-rows: 100px 1fr 50px;
+  justify-content: center;
+  grid-template-areas: 
+        "header header header"
+        "aside main ."
+        "footer footer footer "
+}
+
+section.container header{
+  grid-area: header;
+}
+
+section.container footer{
+  grid-area: footer;
+}
+
+section.container aside{
+  grid-area: aside;
+}
+section.container main{
+  grid-area: main;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-auto-rows: 100px;
+  justify-content: center;
+  gap: 5px;
+}
+
+p.error {
+}
+p.success {
+}
+
+div.product {
+  border: #010101; 
+  border-style: solid;
+  border-radius: 20px;
+  color: #73C2BE;
+  border-color: #776885;
+  background-color: #5F1A37;
+}
+
+div.product h3 {
+  text-align: center;
+}
+
+div.product-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+h3 span.danger {
+  color:  rgb(255, 102, 0);
+}
+
+table.product-table {
+  width: max-content;
+}
+
+form.add-product div{
+  margin: 10px;
+}
+
+form.add-product div.block label{
+  display:block;
+}
+
+button.close {
+  position: absolute;
+  right: 2%;
+  top:2%;
+}
+
+small.brand {
+  font-size: small;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.9);
+}
