@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { ProductsContext } from "../../context/Products";
 
 const AddProductForm = () => {
-	const { addProduct } = useContext(ProductsContext);
+	const { addProduct,categories } = useContext(ProductsContext);
 	const [error,setError] = useState("")
 	const [success,setSuccess] = useState("")
 	const [mandatory,setMandatory] = useState(false)
@@ -17,14 +17,7 @@ const AddProductForm = () => {
 		data.brand = Object.fromEntries(formData).brand
 		data.minQuantity = Object.fromEntries(formData).minQuantity
 		data.mandatory = mandatory
-		console.log(Object.fromEntries(formData))
-		console.log(formData)
-        data.tags = []
-		for (const pair of formData.entries()) {
-            if (pair[0] == "tags"){
-                data.tags.push(pair[1])
-            }
-		}
+        data.category = Object.fromEntries(formData).category
         const key=crypto.randomUUID()
 		try {
 			addProduct({...data,key:key})
@@ -35,27 +28,29 @@ const AddProductForm = () => {
 		}
 	};
 	return (
-		<>
-			<form className="add-product" onSubmit={handleSubmit}>
+			<form className="add" onSubmit={handleSubmit}>
 				<div className="block">
 					<label htmlFor="name">Nombre del producto:</label>
-					<input name="name" required></input>
+					<input name="name" type="text" required></input>
 				</div>
 				<div className="block">
 					<label htmlFor="brand">Marca:</label>
-					<input name="brand"></input>
+					<input name="brand" type="text"></input>
 				</div>
 				<div className="block">
 					<label htmlFor="minQuantity">Cantidad Minima:</label>
 					<input name="minQuantity" type="number"></input>
 				</div>
 				<div>
-					<label htmlFor="tags">Tags:</label>
-					<select name="tags">
-						<option>Higiene</option>
-						<option>Verduras</option>
-						<option>Cocina</option>
-						<option>Otros</option>
+					<label htmlFor="category">Categoria:</label>
+					<br></br>
+					<br></br>
+					<select name="category">
+						{
+							categories.map((category)=>{
+								return <option key={category}>{category}</option>
+							})
+						}
 					</select>
 				</div>
 				<div>
@@ -69,10 +64,9 @@ const AddProductForm = () => {
 				<br></br>
 				<hr></hr>
 				<button>Agregar</button>
-				{error && <p class="error">Error: {error}</p>}
-				{success && <p class="success">{success}</p>}
+				{error && <p className="error">Error: {error}</p>}
+				{success && <p className="success">{success}</p>}
 			</form>
-		</>
 	);
 };
 

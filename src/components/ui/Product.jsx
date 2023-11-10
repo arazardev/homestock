@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import ModalFromButton from './ModalFromButton';
 import { ProductsContext } from '../../context/Products';
+import { EditIcon, MinusIcon, PlusIcon } from './Icons';
+import ProductEdit from './ProductEdit';
 
 const Product = ({product}) => {
   
@@ -9,38 +11,24 @@ const Product = ({product}) => {
 		<div className="product">
 			<h3>
 				<strong>{product.name}:</strong>{" "}
-				<span className={product.minQuantity <= product.stock ? "" : "danger"}>
+				<span className={product.minQuantity <= product.stock ? "success" : "danger"}>
 					{product.stock}
 				</span>
 			</h3>
+			<h5>{product.brand}</h5>
 			<div className="product-buttons">
-				<button
+				<button className="btn-product sm"
 					onClick={() => addProductStock({ label: product.label, amount: -1 })}
 				>
-					➖
+					<MinusIcon size="20"></MinusIcon>
 				</button>
-				<button
+				<button className="btn-product sm"
 					onClick={() => addProductStock({ label: product.label, amount: 1 })}
 				>
-					➕
+					<PlusIcon size="20"></PlusIcon>
 				</button>
-				<ModalFromButton buttonText={"🔎"}>
-					<table className="product-table">
-						<tbody>
-							<tr>
-								<th>Nombre</th>
-								<td>{product.name}</td>
-							</tr>
-							<tr>
-								<th>Marca</th>
-								<td>{product.brand}</td>
-							</tr>
-							<tr>
-								<th>Cant.Minima</th>
-								<td>{product.minQuantity}</td>
-							</tr>
-						</tbody>
-					</table>
+				<ModalFromButton dialogClass='md' className="btn-product sm" buttonText={<EditIcon size="20"></EditIcon>}>
+					<ProductEdit {...product}></ProductEdit>
 				</ModalFromButton>
 			</div>
 		</div>

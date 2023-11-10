@@ -4,12 +4,32 @@ export const ProductsContext = createContext([])
 
 export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState({})
+    const [categories,setCategories] = useState([])
 
     useEffect(()=>{
       if (localStorage.getItem("products")){
         setProducts(JSON.parse(localStorage.getItem("products")));
       }
+      if (localStorage.getItem("categories")){
+        setCategories(JSON.parse(localStorage.getItem("categories")));
+      }
     },[])
+
+    //CATEGORIA
+
+    const addCategory = (category)=>{
+      let updatedCategories = categories.concat(category)
+      setCategories(updatedCategories)
+      localStorage.setItem("categories",JSON.stringify(updatedCategories))
+    }
+    
+    const deleteCategory = (category)=>{
+      let updatedCategories = categories.filter((c)=>c!==category)
+      setCategories(updatedCategories)
+      localStorage.setItem("categories",JSON.stringify(updatedCategories))
+    }
+
+    //PRODUCTOS
 
     const addProduct = (product)=> {
         if (Object.keys(products).includes(product.label)){
@@ -33,5 +53,12 @@ export const ProductsProvider = ({children}) => {
       localStorage.setItem("products",JSON.stringify(newProductsState))
 		};
 
-  return <ProductsContext.Provider value={{products,addProduct,addProductStock}}>{children}</ProductsContext.Provider>;
+    const deleteProduct = ({label}) =>{
+      let auxProducts = {...products}
+      delete auxProducts[label]
+      setProducts(auxProducts)
+      localStorage.setItem("products",JSON.stringify(auxProducts))
+    }
+
+  return <ProductsContext.Provider value={{categories,addCategory,deleteCategory,products,addProduct,deleteProduct,addProductStock}}>{children}</ProductsContext.Provider>;
 }

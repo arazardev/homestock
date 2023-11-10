@@ -1,48 +1,34 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import './index.css'
 import { ProductsContext } from './context/Products';
-import ModalFromButton from './components/ui/ModalFromButton';
-import AddProductForm from './components/ui/AddProductForm';
 import Product from './components/ui/Product';
+import AsideList from './components/ui/AsideList';
+import AsideMenu from './components/ui/AsideMenu';
+import Header from './components/ui/Header';
+import { UserProvider } from './context/User';
 
 function App() {
 	const { products } = useContext(ProductsContext);
-	const [search,setSearch] = useState("")
-	const [productsFiltered,setProductsFiltered] = useState({})
-
-	// useEffect(()=>{
-	// 	for (product in Object.keys(products)){
-
-	// 	}
-	// },[search])
+	
 	return (
-			<section className="container">
-				<header>
-					<h1>🏠 Home Stock</h1>
-				</header>
-				<aside>
-					<span>
-						<ModalFromButton buttonText={"Agregar producto"}>
-							<AddProductForm />
-						</ModalFromButton>
-						<input
-							placeholder="Filtrar productos"
-							onChange={(e) => setSearch(e.target.value)}
-						></input>
-					</span>
-				</aside>
-				<main>
-					{Object.keys(products)?.map((label) => {
-						return (
-							<Product
-								product={products[label]}
-								key={products[label].key}
-							></Product>
-						);
-					})}
-				</main>
-				<footer></footer>
-			</section>
+		<section className="container">
+			<Header></Header>
+			<AsideMenu />
+			<main>
+				{Object.keys(products)?.map((label) => {
+					return (
+						<Product
+							product={products[label]}
+							key={products[label].key}
+						></Product>
+					);
+				})}
+			</main>
+			<UserProvider>
+				<AsideList />
+			</UserProvider>
+			<footer></footer>
+		</section>
 	);
 }
 
