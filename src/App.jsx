@@ -9,7 +9,6 @@ import { UserProvider } from './context/User';
 
 function App() {
 	const { products,search } = useContext(ProductsContext);
-	const [filteredProducts,setFilteredProducts] = useState({})
 	
 	return (
 		<section className="container">

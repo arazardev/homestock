@@ -32,6 +32,8 @@ section.container {
 
 section.container header{
   grid-area: header;
+  text-align: center;
+  color: antiquewhite
 }
 
 section.container footer{

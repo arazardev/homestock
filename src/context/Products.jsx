@@ -4,7 +4,7 @@ export const ProductsContext = createContext([])
 
 export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState({})
-    const [categories,setCategories] = useState([])
+    const [categories,setCategories] = useState(["Verduleria","Snacks y Galletitas","Lacteos","Almacen","Bebidas","Carniceria","Candy","Higiene y Limpieza"])
     const [search, setSearch] = useState("")
 
     useEffect(()=>{

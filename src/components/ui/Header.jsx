@@ -2,7 +2,7 @@
 const Header = () => {
   return (
 		<header>
-			{/* <img src="/public/homestock.jpeg" width={"100"}></img> */}
+			Homestock
 		</header>
 	);
 }
